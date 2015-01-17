@@ -1,0 +1,10 @@
+<% @restaurants.each do |restaurant| %>
+<%= link_to restaurant.name, "/restaurants/#{restaurant.id}" %>
+<br>
+タグ：<%= restaurant.tags  %>
+<br>
+単価：<%= restaurant.price %>
+<br>
+レビュー：<%= restaurant.review %>
+<br><br>
+<% end %>
