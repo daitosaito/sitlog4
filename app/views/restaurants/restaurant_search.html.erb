@@ -1,0 +1,12 @@
+<h1>検索結果</h1>
+<h4>(This is just a first-review. If you want further information, keep going!!!）</h4>
+<% @restaurants.each do |restaurant| %>
+<%= link_to restaurant.name, "#{restaurant.id}" %>
+<br>
+タグ：<% restaurant.tags.each do |tag|  %> <%= tag.name %>,<% end %>
+<br>
+単価：<%= restaurant.price %>
+<br>
+レビュー：<%= restaurant.review %>
+<br><br>
+<% end %>

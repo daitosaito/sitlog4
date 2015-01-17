@@ -1,0 +1,36 @@
+<div style="color: red;">
+<%= params[:notice] %>
+</div>
+
+
+<%= form_for(@restaurant) do |f| %>
+  <%= f.text_field :name, placeholder: :"レストラン名" %>
+  <%= f.text_field :area, placeholder: :"エリアを入力して下さい" %>
+
+
+  <div>
+      <p>タグ一覧　クリックすると追加されます。</p>
+        <% @categories.each do |category| %>
+          <%= category.name %><br>
+          <% tags = category.tags %>
+            <% tags.each do |tag| %>
+              <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+            <!-- 第一引数：パラメータ、第二引数：表示名 -->
+            <% end %>
+            <br><br>
+        <% end %>
+    </div>
+  <%= f.text_field :price, placeholder: :"客単価" %>
+  <%= f.text_area :review, placeholder: :"自由記述" %>
+  <%= f.submit "投稿する"  %>
+<% end %>
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script>
+  $(function(){
+    $(".tags_btn").click(function () {
+      $(this).css("background-color", "red");
+    });
+  });
+</script> -->
+

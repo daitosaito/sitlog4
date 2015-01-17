@@ -1,0 +1,8 @@
+<% @restaurants.each do |restaurant| %>
+<h4><%= restaurant.name %></h4>
+<%= restaurant.review %><br><%= restaurant.area %><br>
+<% id = restaurant.id %>
+<%= link_to "この投稿の詳細へ", "/users/#{id}/restaurant_show" %>
+<br><br>
+<% end %>
+

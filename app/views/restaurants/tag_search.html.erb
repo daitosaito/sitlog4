@@ -1,0 +1,15 @@
+<h4>クリックしてお店情報をcheck!!</h4>
+<% if @restaurants %>
+  <div>
+    <% @restaurants.each do |restaurant| %>
+      店名：<%= link_to restaurant.name, "/restaurants/#{restaurant.id}" %><br>
+      エリア：<%= restaurant.area %><br>
+      価格：<%= restaurant.price %><br>----------------<br>
+    <% end %>
+  </div>
+
+<% else %>
+  <div>
+    ちゃんとパラメータを送りたまへ（あとでjqueryでalert画面とか表示しよう）
+  </div>
+<% end %>

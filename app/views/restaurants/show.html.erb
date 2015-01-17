@@ -1,0 +1,26 @@
+<!-- ここから最初の投稿（restaurantsテーブルより） -->
+<h4>店名：<%= @restaurant.name %></h4><h4>価格：<%= @restaurant.price %></h4><h4>エリア：<%= @restaurant.area %></h4>
+<p><%= link_to "このレストランにレビューを加える", new_review_path(:id => "#{@restaurant.id}") %></p>
+----------------------------------------------------------
+<h5>投稿者: <%= link_to @user.nickname, user_path(:id => "#{@user.id}") %></h5>
+
+<h5>レビュー：<%= @restaurant.review %></h5>
+
+<h5>タグ：<%= @restaurant.tags.pluck(:name).join(",") %></h5>
+<% if user_signed_in? && current_user.id == @restaurant.user_id %>
+<h4><%= link_to "編集する", edit_restaurant_path %></h4>
+<h4><%= link_to "削除する", "/restaurants/#{@restaurant.id}", method: :delete %></h4>
+<% end %><br>
+
+
+<!--ここから2つ目以降の投稿（reviewsテーブルより） -->
+<% @reviews.each do|review| %>
+  <h5>投稿者: <%= link_to review.user.nickname, user_path(:id => "#{@user.id}") %></h5>
+  <h5>レビュー：<%= review.review %></h5>
+  <h5>タグ：<%= review.tags.map{|i| i.name}.join(",") %></h5>
+
+  <% if user_signed_in? && current_user.id == review.user_id %>
+  <h4><%= link_to "編集する", edit_review_path(:id => review.id) %></h4>
+  <h4><%= link_to "削除する", "/reviews/#{review.id}", method: :delete %></h4>
+  <% end %><br>
+<% end %>
