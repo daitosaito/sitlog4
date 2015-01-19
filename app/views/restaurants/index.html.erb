@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="row">
+
+    <button type="button" class="btn btn-primary btn-lg btn-block">
+      <a href="/restaurants/new" style ="color: gold;">クリックしてお店のレビューを投稿しよう！</a>
+    </button>
+
+
+    <br><br><br>
+    <%= form_tag({action: :tag_search}, {method: :get}) do %>
+        <%= Category.find(1).name %>
+        <br>
+        人数を１つ選択して下さい：
+        <% @tag_group1.each do |tag| %>
+          <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+      <% end %>
+        <br>
+        気分を１つ選択して下さい：
+        <% @tag_group2.each do |tag| %>
+          <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+        <% end %>
+        <br><br><br>
+        <%= Category.find(2).name %>
+        <br>
+        スピード感を１つ選択して下さい：
+        <% @tag_group3.each do |tag| %>
+          <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+      <% end %>
+        <br>
+        気分で１つ選択して下さい：
+        <% @tag_group4.each do |tag| %>
+          <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+      <% end %>
+        <br><br><br>
+        <%= Category.find(3).name %>
+        <br>
+        相手のことを考えながら決めて下さい：
+        <% @tag_group5.each do |tag| %>
+          <%= check_box "tag_children", "#{tag.name}", {}, true, false %><%= tag.name %>
+      <% end %>
+        <br><br>
+        <button type="button" class="btn btn-primary btn-lg btn-block">
+          <input type="submit" value="この条件で検索する" style="color: gold; background-color: green;">
+        </button>
+    <% end %>
+
+
+<!-- ここからレストラン -->
+
+    <br>
+    <div class="col-sm-6" >
+      <div style="background-color: yellow;">
+      <%= form_for :restaurant, :url => {:action => "restaurant_search"}, method: :get do |f|%>
+        <br>
+        <p>レストラン名から検索する</p>
+        <input class="search__query" name="restaurant" placeholder="レストラン名で検索" type="text"></input>
+      <% end %>
+      </div>
+    </div>
+
+    <!-- ここからエリア -->
+    <div class="col-sm-6" >
+      <div style="background-color: silver;">
+          <%= form_tag({action: :area_search}, {method: :get}) do %>
+            <p>エリアから検索する</p>
+            <input class="search__query" name="area" placeholder="エリアで検索" type="text">  </input>
+          <% end %>
+
+            <p>クリックするとそのエリアのレストラン一覧へ飛びます</p>
+            <% @areas.each do |area| %>
+              <button type="button" class="btn btn-link">
+                <%= link_to area, area_search_restaurants_path(params_area: :"#{area}") %>
+              </button>
+            <% end %>
+        </div>
+    </div>
+
+  </div>
+</div>

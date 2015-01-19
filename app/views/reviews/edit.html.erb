@@ -1,0 +1,23 @@
+  <%= form_tag("/reviews/#{@review.id}", :method => :patch) do %>
+    <h3>
+      編集する
+    </h3>
+
+  <div>
+    <p>これまでのタグ一覧　クリックすると追加されます。</p>
+      <% @categories.each do |category| %>
+        <%= category.name %><br>
+        <% tags = category.tags %>
+          <% tags.each do |tag| %>
+            <% if @tags.include?(tag) %>
+              <%= check_box "tag_children", "#{tag.name}", {:checked => true}, true, false %><%= tag.name %> <!-- 第一引数：パラメータ、第二引数：表示名 -->
+            <% else %>
+              <%= check_box "tag_children", "#{tag.name}", {:checked => false}, true, false %><%= tag.name %>
+            <% end %>
+          <% end %>
+          <br><br>
+      <% end %>
+  </div>
+    <input style="height:140px; width:200px;" align ="bottom" value="<%= @review.review %>" name="review" ></textarea>
+    <input type="submit" value="編集を確定する">
+  <% end %>

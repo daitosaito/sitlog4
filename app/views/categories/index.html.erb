@@ -1,0 +1,9 @@
+<% @categories.each do |category| %>
+  <%= category.name %>
+  <br>
+  <% tags = category.tags %>
+    <% tags.each do |tag| %>
+      <%= tag.name %>
+    <% end %>
+  <br><br>
+<% end %>

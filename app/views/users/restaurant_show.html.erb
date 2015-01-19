@@ -1,0 +1,11 @@
+<h4>店名：<%= @restaurant.name %></h4>
+<h4>価格：<%= @restaurant.price %></h4>
+<h4>エリア：<%= @restaurant.area %></h4>
+<h4>レビュー：<%= @restaurant.review %></h4>
+<h4>タグ：<%= @restaurant.tags.pluck(:name).join(",") %></h4>
+
+
+<% if user_signed_in? && current_user.id == @restaurant.user_id %>
+<h4><%= link_to "編集する", edit_restaurant_path %></h4>
+<h4><%= link_to "削除する", "/restaurants/#{@restaurant.id}", method: :delete %></h4>
+<% end %>
